@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package order.common;
+
+option go_package = "./proto";
+
+message FilterKeyword {
+  string field_to_filter = 1 [json_name="fieldToFilter"];
+  string keyword = 2;
+}
+
+enum SortDirection {
+  UNKNOWN = 0;
+  ASCENDING = 1;
+  DESCENDING = 2;
+}
+
+message SortOption {
+  string field_to_sort = 1 [json_name="fieldToSort"];
+  SortDirection direction = 2;
+}
+
+message ListRequestWithFilterAndSort {
+  int32 page = 1;
+  int32 page_size = 2 [json_name="pageSize"];
+  string keyword = 3;
+  repeated FilterKeyword field_filter = 4 [json_name="fieldFilter"];
+  SortOption sort_by = 5 [json_name="sortBy"];
+}
+
+enum PlatformType {
+  PLATFORM_TYPE_UNKNOWN = 0;
+  PLATFORM_TYPE_MEITUAN_SHANGOU = 1; // 美团闪购
+  PLATFORM_TYPE_ELEME_WAIMAI = 2; // 饿了么外卖
+  PLATFORM_TYPE_ELEME_RETAIL = 3; // 饿了么新零售
+  PLATFORM_TYPE_JINGDONG_DAOJIA = 4; // 京东到家
+  PLATFORM_TYPE_MEITUAN_WAIMAI = 5; // 美团外卖
+  PLATFORM_TYPE_TIANMAO_CHAOSHI = 6; // 天猫超市
+  PLATFORM_TYPE_YOUZAN = 7; // 有赞微商城
+  PLATFORM_TYPE_YOUZAN_RETAIL = 8; // 有赞零售
+  PLATFORM_TYPE_JINGDONG_OMNI = 9; // 京东全渠道
+  PLATFORM_TYPE_THIRD_PARTY = 10;  // 第三方渠道
+  PLATFORM_TYPE_DOUDIAN = 11;  // 抖店
+  PLATFORM_TYPE_TIANMAO_NEW_RETAIL = 12;  // 天猫新零售
+}
+
+// 配送平台类型
+enum DeliveryPlatformType {
+  // 其他，未知
+  DELIVERY_PLATFORM_TYPE_UNKNOWN = 0;
+  // 蜂鸟跑腿
+  DELIVERY_PLATFORM_TYPE_FENGNIAO = 1;
+  // 美团跑腿
+  DELIVERY_PLATFORM_TYPE_MEITUAN = 2;
+  // 达达
+  DELIVERY_PLATFORM_TYPE_DADA = 3;
+  // 闪送
+  DELIVERY_PLATFORM_TYPE_SHANSONG = 4;
+  // 顺丰同城
+  DELIVERY_PLATFORM_TYPE_SHUNFENG_TONGCHENG = 5;
+  // 蜂鸟独立结算
+  DELIVERY_PLATFORM_TYPE_FENGNIAO_IS = 6;
+  // 美团配送
+  DELIVERY_PLATFORM_TYPE_MEITUAN_PEISONG = 7;
+  // 土星配送
+  DELIVERY_PLATFORM_TYPE_SATURN = 8;
+  // 蜂鸟月结
+  DELIVERY_PLATFORM_TYPE_FENGNIAO_NEW = 9;
+  // 顺丰快递
+  DELIVERY_PLATFORM_TYPE_SHUNFENG = 10;
+  // 快递100
+  DELIVERY_PLATFORM_TYPE_KUAIDI100 = 11;
+  // 京东快递
+  DELIVERY_PLATFORM_TYPE_JINGDONG = 12;
+  // 美团专送
+  DELIVERY_PLATFORM_TYPE_MEITUAN_MANAGED = 13;
+  // 饿百专送
+  DELIVERY_PLATFORM_TYPE_ELEME_MANAGED = 14;
+  // 京东到家专送
+  DELIVERY_PLATFORM_TYPE_JINGDONG_MANAGED = 15;
+  // 申通
+  DELIVERY_PLATFORM_TYPE_SHENTONG = 16;
+  // 圆通
+  DELIVERY_PLATFORM_TYPE_YUANTONG = 17;
+  // 中通
+  DELIVERY_PLATFORM_TYPE_ZHONGTONG = 18;
+  // 韵达
+  DELIVERY_PLATFORM_TYPE_YUNDA = 19;
+  // 德邦
+  DELIVERY_PLATFORM_TYPE_DEBANG = 20;
+  // 极兔
+  DELIVERY_PLATFORM_TYPE_JITU = 21;
+}
+
+
+message OperatorInfo {
+  int64 user_id = 1 [json_name="userId"];
+}
