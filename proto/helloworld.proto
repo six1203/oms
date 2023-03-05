@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-package order.helloworld;
-option go_package = "./proto";
+package six1203.order.helloworld;
+option go_package = "github.com/six1203/order/helloworld;helloworld";
 
 message HelloRequest {
   string name = 1;
