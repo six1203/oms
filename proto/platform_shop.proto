@@ -1,0 +1,228 @@
+syntax = "proto3";
+
+package order.platform_shop;
+
+import "google/protobuf/timestamp.proto";
+import "common.proto";
+
+option go_package = "github.com/six1203/order/platform_shop;platform_shop";
+
+
+
+// 平台门店营业状态
+enum PlatformShopOnlineStatus {
+  PLATFORM_SHOP_ONLINE_STATUS_UNKNOWN = 0;
+  PLATFORM_SHOP_ONLINE_STATUS_ONLINE = 1;
+  PLATFORM_SHOP_ONLINE_STATUS_OFFLINE = 2;
+}
+
+// 配送方式
+enum DeliveryType {
+  DELIVERY_TYPE_UNKNOWN = 0;
+  // 商家自配
+  DELIVERY_TYPE_SELF_DELIVERY = 1;
+  // 平台托管 (专送)
+  DELIVERY_TYPE_PLATFORM_MANAGED_DELIVERY = 2;
+}
+
+// 门店的接单方式
+enum PlatformShopOrderConfirmationMethod {
+  PLATFORM_SHOP_ORDER_CONFIRMATION_METHOD_UNKNOWN = 0;
+  PLATFORM_SHOP_ORDER_CONFIRMATION_METHOD_AUTO = 1;
+  PLATFORM_SHOP_ORDER_CONFIRMATION_METHOD_MANUAL = 2;
+}
+
+// 预定下单的方式
+enum PlatformShopPreorderStatus {
+  PLATFORM_SHOP_PREORDER_STATUS_UNKNOWN = 0;
+  // 不接单
+  PLATFORM_SHOP_PREORDER_STATUS_NOT_ACCEPTING = 1;
+  // 休息时间接受预定
+  PLATFORM_SHOP_PREORDER_STATUS_ACCEPTING = 2;
+}
+
+// 门店的发货方式
+enum PlatformShopShipmentMethod {
+  // 占位符，未知（一般不会出现改值）
+  PLATFORM_SHOP_SHIPMENT_METHOD_UNKNOWN = 0;
+  // 门店直发
+  PLATFORM_SHOP_SHIPMENT_METHOD_BY_SHOP = 1;
+  // 仓库代发
+  PLATFORM_SHOP_SHIPMENT_METHOD_BY_WAREHOUSE = 2;
+}
+
+// 门店的发货模式
+enum PlatformShopShipmentMode {
+  // 占位符，未知（一般不会出现改值）
+  PLATFORM_SHOP_SHIPMENT_MODE_UNKNOWN = 0;
+  // 就近发货 (所有指定模式的已启用的站点)
+  PLATFORM_SHOP_SHIPMENT_MODE_NEARBY = 1;
+  // 指定单个站点发货
+  PLATFORM_SHOP_SHIPMENT_MODE_SINGLE = 2;
+}
+
+enum PlatformShopShipNearbyMode {
+  SHIP_NEARBY_MODE_UNKNOWN = 0;
+  // 同城发货
+  SHIP_NEARBY_MODE_SAME_CITY = 1;
+  // 全国发货
+  SHIP_NEARBY_MODE_SAME_COUNTRY = 2;
+}
+
+// 仓库代发模式下相关数据
+message ShipmentModeSingleDetail {
+  int64 warehouse_id = 1;
+}
+
+
+message PlatformShop {
+  // 主键
+  int32 id = 1;
+  // 绑定的门店 ID
+  int32 shop_id = 2;
+  // 平台侧门店 ID
+  string platform_shop_id = 3;
+  // 门店名字
+  string platform_shop_name = 4;
+  // 城市
+  string city = 5;
+  // 营业状态
+  PlatformShopOnlineStatus online_status = 6;
+  // 配送方式
+  DeliveryType delivery_type = 7;
+  // 接单方式
+  PlatformShopOrderConfirmationMethod order_confirmation_method = 8;
+  // 营业时间, 目前暂不做结构化
+  // 一周7天, 用;间隔.
+  // 每天营业时间如果有多个时间段, 则用逗号隔开, 例如: 9:00-12:00,13:00-23:00
+  string shipping_time = 9;
+  // 预定单接收的状态设置
+  PlatformShopPreorderStatus pre_order_method = 10;
+  // 客服电话
+  string consumer_hotline = 11;
+  // 可预定时间段, 目前暂不做结构化
+  // 可预定时间段，0-7数字， 由逗号隔开：0，1(仅支持当天到隔天的预订单)
+  string period_time_of_booking = 12;
+  // matrix 上对应的 platform_shop_pk
+  int32 matrix_id = 13;
+  // 是否已经删除
+  bool is_deleted = 14;
+  // 平台
+  common.PlatformType platform_type = 15;
+
+  // 创建时间
+  google.protobuf.Timestamp created_at = 16;
+  // 更新时间
+  google.protobuf.Timestamp updated_at = 17;
+
+  // 资源组 ID
+  int64 resource_group_id = 18;
+  // 归属的商户 ID
+  int64 merchant_id = 19;
+
+  // logo
+  string logo = 20;
+  // 公告
+  string announcement = 21;
+  // 品类
+  repeated string categories = 22;
+  // 地址
+  string address = 23;
+
+  // 配送方式，门店直发 or 仓库代发
+  PlatformShopShipmentMethod shipment_method = 25;
+  // 发货模式，就近发货 or 指定单个仓库发货
+  PlatformShopShipmentMode shipment_mode = 26;
+  // 指定的发货仓库
+  ShipmentModeSingleDetail shipment_mode_single_detail = 27;
+
+  // 是否支持拆单
+  bool is_support_multi_pack_logistics = 28;
+  // 就近发货模式下的发货范围
+  ShipmentModeNearbyDetail shipment_mode_nearby_detail = 29;
+
+  // 经纬度
+  string latitude = 30;
+  string longitude = 31;
+
+  int32 order_switch = 32;
+}
+
+
+message ShipmentModeNearbyDetail {
+  PlatformShopShipNearbyMode mode = 1;
+}
+
+// 平台门店评分信息
+message PlatformShopScoreInfo {
+  // PlatformShop 的系统主键
+  int32 platform_shop_pk = 1;
+  // 门店评分
+  string score = 2;
+  // 店铺打包分
+  string package_rating = 3;
+  // 店铺配送分
+  string delivery_score = 4;
+  // 店铺质量分
+  string quality_rating = 5;
+  // 店铺服务分
+  string service_rating = 6;
+}
+
+// 鉴权状态
+message CredentialStats {
+  // 总共平台绑定
+  int32 total = 1;
+  // 已激活的平台绑定
+  int32 active = 2;
+  // 已失效的平台绑定
+  int32 unbound = 3;
+}
+
+message PlatformShopDeliveryAddress {
+  int64 id = 1;
+  // 店铺名称
+  string shop_name = 2;
+  // 联系人
+  string contact = 3;
+  // 电话号码
+  string phone_number = 4;
+  // poi地址+详细地址
+  string full_address = 7;
+  // 纬度
+  string latitude = 8;
+  // 经度
+  string longitude = 9;
+  // 城市名
+  string city = 10;
+  // PlatformShop 的 pk
+  int64 platform_shop_pk = 12;
+  // 创建时间
+  google.protobuf.Timestamp created_at = 13;
+  // 更新时间
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+message GetPlatformShopByIdRequest {
+  int32 id = 1;
+  common.OperatorInfo operator = 2;
+}
+
+message GetPlatformShopByIdResponse {
+  // 平台门店
+  PlatformShop platform_shop = 1;
+  // 门店的评分信息
+  PlatformShopScoreInfo score_info = 2;
+  // 绑定(鉴权)状态
+  CredentialStats credential_info = 3;
+  // 门店的配送地址信息
+  repeated PlatformShopDeliveryAddress delivery_addresses = 4;
+}
+
+
+
+
+service PlatformShopService {
+  // 通过 id 获取平台门店详细信息
+  rpc GetPlatformShopById(GetPlatformShopByIdRequest) returns (GetPlatformShopByIdResponse);
+}

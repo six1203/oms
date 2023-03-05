@@ -1,0 +1,500 @@
+syntax = "proto3";
+
+package order.order;
+
+import "google/protobuf/timestamp.proto";
+import "common.proto";
+import "platform_shop.proto";
+
+
+option go_package = "github.com/six1203/order/order;order";
+
+// 订单主状态
+enum OrderMainStatus {
+  // 未知
+  ORDER_MAIN_STATUS_UNKNOWN = 0;
+  // 未支付
+  ORDER_MAIN_STATUS_UNPAID = 5;
+  // 待接单
+  ORDER_MAIN_STATUS_WAIT_CONFIRM = 10;
+  // 已接单
+  ORDER_MAIN_STATUS_CONFIRMED = 20;
+  // 配送中
+  ORDER_MAIN_STATUS_DELIVERING = 30;
+  // 配送完成
+  ORDER_MAIN_STATUS_DELIVERED = 40;
+  // 取消中
+  ORDER_MAIN_STATUS_CANCELING = 50;
+  // 已取消
+  ORDER_MAIN_STATUS_CANCELED = 60;
+  // 已完成
+  ORDER_MAIN_STATUS_FINISHED = 70;
+}
+
+// 子单的主状态
+enum SubOrderStatus {
+  SUB_ORDER_STATUS_UNKNOWN = 0;
+  // 备货中/待发货
+  SUB_ORDER_STATUS_PREPARING = 5;
+  // 配送中
+  SUB_ORDER_STATUS_SHIPPING = 10;
+  // 取消中
+  SUB_ORDER_STATUS_CANCELING = 95;
+  // 已到达 (终态)
+  SUB_ORDER_STATUS_ARRIVED = 20;
+  // 已取消 (终态)
+  SUB_ORDER_STATUS_CANCELED = 99;
+}
+
+// 子单的呼叫状态
+enum SubOrderDeliveryCallingStatus {
+  SUB_ORDER_DELIVERY_CALLING_STATUS_UNKNOWN = 0;
+  // 待呼叫
+  SUB_ORDER_DELIVERY_CALLING_STATUS_PENDING = 1;
+  // 呼叫中
+  SUB_ORDER_DELIVERY_CALLING_STATUS_PROCESSING = 2;
+  // 已成功
+  SUB_ORDER_DELIVERY_CALLING_STATUS_SUCCESSFUL = 3;
+  // 已失败
+  SUB_ORDER_DELIVERY_CALLING_STATUS_FAILED = 4;
+}
+
+// 订单用户相关信息
+message OrderUserInfo {
+  // 收货人姓名
+  string receiver_name = 1;
+  // 收货人电话, 真实号 or 虚拟号
+  string receiver_phone = 2;
+  // 收货人完整地址
+  string receiver_address = 3;
+  // 用户下单备注
+  string user_remark = 4;
+  // 期望送达时间
+  google.protobuf.Timestamp expected_arrival_time = 5;
+  // 经度, 高德
+  string longitude = 6;
+  // 纬度, 高德
+  string latitude = 7;
+}
+
+// 订单商品信息
+message OrderItem {
+  // 平台订单号，主单号
+  string platform_order_id = 1;
+  // 平台子单号，一般是按照sku维度的
+  string platform_order_item_id = 2;
+  // 平台商品SPU ID
+  string platform_spu_id = 3;
+  // 平台商品SKU ID
+  string platform_sku_id = 4;
+  // 平台商品SKU 名称
+  string platform_sku_name = 5;
+  // 平台sku商品图片
+  string platform_sku_picture_url = 6;
+  // 单个sku的商品现价（实际支付价格），单位：分
+  int32 actual_price = 7;
+  // 单个sku的商品原价（未扣减所有优惠前的价格），单位：分
+  int32 original_price = 8;
+  // 订单中此商品sku的购买数量
+  int32 quantity = 9;
+  // order_item 主键
+  int64 id = 10;
+  // 平台商品SPU 外部 ID
+  string platform_spu_out_id = 11;
+  // 平台商品SKU 外部 ID
+  string platform_sku_out_id = 12;
+}
+
+// 订单金额信息
+message OrderAmountInfo {
+  // 订单金额，GMV, 单位：分
+  int32 total = 1;
+  // 用户实付，支持金额，单位：分
+  int32 user_paid = 2;
+  // 总的优惠金额，单位：分
+  int32 discount_amount = 3;
+  // 用户支付的配送费，单位：分
+  int32 delivery_fee = 4;
+  // 实际配送产生的配送费，单位：分
+  int32 order_delivery_fee = 5;
+  // sku维度的包装费, 特殊包材，精美礼盒包装等， 单位：分
+  int32 packing_fee = 6;
+  // 打包费， 单位：分
+  int32 order_packing_fee = 7;
+  // 平台补贴， 单位：分
+  int32 platform_subsidy = 8;
+  // 平台抽佣， 单位：分
+  int32 platform_commission = 9;
+  // 预计收入，单位：分
+  int32 estimated_income = 10;
+}
+
+message SimpleOrderAmountInfo {
+  // 用户实付，支持金额，单位：分
+  int32 user_paid = 1;
+  // 预计收入，单位：分
+  int32 estimated_income = 2;
+}
+
+// 订单门店信息
+message OrderShopInfo {
+  // 平台门店主键
+  int32 id = 1;
+  // 平台门店ID
+  string platform_shop_id = 2;
+  // 平台门店名称
+  string platform_shop_name = 3;
+  // 门店的物流类型, 自配送or平台专送
+  platform_shop.DeliveryType delivery_type = 4;
+  // 门店的发货方式 门店直发or仓库代发
+  platform_shop.PlatformShopShipmentMethod shipment_method = 5;
+}
+
+// 订单优惠信息
+message OrderDiscountInfo {
+  // 商品名称
+  string name = 1;
+  // 优惠金额, 单位 分
+  int32 amount = 2;
+}
+
+// 平台订单
+message PlatformOrder {
+  string platform_order_id = 1;
+  common.PlatformType platform_type = 2;
+  string platform_shop_id = 3;
+  int32 platform_shop_pk = 4;
+  string detail = 5;
+  string platform_order_status = 6;
+  string platform_order_status_desc = 7;
+  google.protobuf.Timestamp create_time = 8;
+}
+
+message SubOrder {
+  // 子单主键
+  int64 id = 1;
+  // 平台订单号，主单号
+  string platform_order_id = 2;
+  // 平台类型
+  common.PlatformType platform_type = 3;
+  // wms 发货仓库; 如果是门店直发，则是门店的发货地址ID; 如是仓库，则是仓库系统内的仓库 ID
+  int64 warehouse_id = 5;
+  // 配送运单号
+  string delivery_order_number = 6;
+  // 配送单平台类型, 如 顺丰
+  string delivery_order_platform_type_desc = 7;
+  // 运单状态
+  string delivery_order_status = 8;
+  // 运单状态描述
+  string delivery_order_status_desc = 9;
+  // 发货单状态
+  string shipment_order_status = 10;
+  // 发货单状态描述
+  string shipment_order_status_desc = 11;
+  // wms 系统内的发货单编号
+  string shipment_order_number = 12;
+  // 骑手姓名
+  string rider_name = 13;
+  // 骑手电话
+  string rider_phone = 14;
+  // 配送费，单位：分
+  int32 delivery_fee = 15;
+  // 主状态
+  SubOrderStatus status = 16;
+  // 是否是手动标记配送
+  bool is_manual_delivery = 17;
+  // 商户自定义配送编码
+  string merchant_logistics_serial_number = 18;
+  // 主单ID
+  int64 order_id = 19;
+  // 配送的呼叫状态
+  SubOrderDeliveryCallingStatus delivery_calling_status = 20;
+  // 发货仓库名称
+  string warehouse_name = 21;
+  // 取消罚金，单位：分
+  int32 cancel_fee = 22;
+}
+
+//简单的子订单信息
+message SimpleSubOrder {
+  // 子单主键
+  int64 id = 1;
+  // 运单状态码
+  string delivery_order_status = 2;
+  // 运单状态描述
+  string delivery_order_status_desc = 3;
+  // 发货单状态
+  string shipment_order_status = 4;
+  // 发货单状态描述
+  string shipment_order_status_desc = 5;
+  // 配送费 单位 分
+  int32 delivery_fee = 6;
+  // 子单的主状态码
+  SubOrderStatus status = 7;
+  // 商户自定义配送编码
+  string merchant_logistics_serial_number = 8;
+  // 子单的呼叫状态
+  SubOrderDeliveryCallingStatus delivery_calling_status = 9;
+  // wms 发货仓库; 如果是门店直发，则是门店的发货地址ID; 如是仓库，则是仓库系统内的仓库 ID
+  int64 warehouse_id = 10;
+  // wms 发货仓库名称
+  string warehouse_name = 11;
+  // wms 系统内的发货单编号
+  string shipment_order_number = 12;
+}
+
+message Order {
+  // 平台订单号
+  string platform_order_id = 1;
+  // 平台类型
+  common.PlatformType platform_type = 2;
+  // 订单主状态
+  OrderMainStatus main_status = 3;
+  // 订单主状态描述
+  string main_status_desc = 4;
+  // 收货人信息
+  OrderUserInfo user_info = 5;
+  // 商品信息
+  repeated OrderItem order_items = 6;
+  // 订单金额信息
+  OrderAmountInfo order_amount_info = 7;
+  // 订单门店信息
+  OrderShopInfo order_shop_info = 8;
+  // 订单下单时间
+  google.protobuf.Timestamp create_time = 9;
+  // 订单完成时间
+  google.protobuf.Timestamp finish_time = 10;
+  // 订单取消时间
+  google.protobuf.Timestamp cancel_time = 11;
+  // 订单主状态更新时间
+  google.protobuf.Timestamp main_status_update_time = 12;
+  // 疑似异常单
+  bool is_abnormal = 13;
+  // 异常原因列表
+  repeated string abnormal_reason = 14;
+  // 商家订单备注
+  string merchant_remark = 15;
+  // 取消原因
+  string cancel_reason = 17;
+  // 优惠信息
+  repeated OrderDiscountInfo order_discount_info = 18;
+  // 订单主键
+  int64 order_id = 19;
+  // 子单列表
+  repeated SubOrder sub_orders = 20;
+  // 商家ID
+  int64 merchant_id = 21;
+  // 订单标签列表
+  repeated OrderTag tags = 22;
+  // 是否预订单
+  bool is_pre_order = 23;
+  // 物流代理端系统的标识，目前有xtw和other两种
+  string logistics_agent_code = 24;
+  // 能否使用xtw物流端配送
+  bool can_use_xtw_logistics = 25;
+  // 用户取货信息
+  OrderUserPickupInfo user_pickup_info = 26;
+}
+
+message OrderTag {
+  string key = 1;
+  string text = 2;
+}
+
+// 用户取货方式
+enum OrderUserPickupMethod {
+  // 未知
+  ORDER_USER_PICKUP_METHOD_UNKNOWN = 0;
+  // 送货上门
+  ORDER_USER_PICKUP_METHOD_DELIVERY = 1;
+  // 到店自提
+  ORDER_USER_PICKUP_METHOD_SELF_PICKUP = 2;
+}
+
+// 订单用户取货信息
+message OrderUserPickupInfo {
+  // 用户取货方式
+  OrderUserPickupMethod pickup_method = 1;
+  // 到底自提取货码
+  string pickup_code = 2;
+}
+
+// 简单的订单信息
+message SimpleOrder {
+  // 订单主键
+  int64 order_id = 1;
+  // 平台订单号
+  string platform_order_id = 2;
+  // 平台类型
+  common.PlatformType platform_type = 3;
+  // 订单主状态
+  OrderMainStatus main_status = 4;
+  // 订单主状态描述
+  string main_status_desc = 5;
+  // 收货人信息
+  OrderUserInfo user_info = 6;
+  // 商品信息
+  repeated OrderItem order_items = 7;
+  // 订单下单时间
+  google.protobuf.Timestamp create_time = 8;
+  // 订单门店信息
+  OrderShopInfo order_shop_info = 9;
+  // 子单列表
+  repeated SimpleSubOrder simple_sub_orders = 10;
+  // 商家ID
+  int64 merchant_id = 11;
+  // 简单订单金额
+  SimpleOrderAmountInfo simple_order_amount_info = 12;
+  // 是否预订单
+  bool is_pre_order = 13;
+  // 疑似异常
+  bool is_abnormal = 14;
+  // 异常原因列表
+  repeated string abnormal_reason = 15;
+  // 订单标签
+  repeated OrderTag tags = 16;
+  // 物流代理端系统的标识，目前有xtw和other两种
+  string logistics_agent_code = 17;
+  // 能否使用xtw物流端配送
+  bool can_use_xtw_logistics = 19;
+  // 用户取货信息
+  OrderUserPickupInfo user_pickup_info = 20;
+}
+
+enum OrderEventType {
+  // 未知
+  ORDER_EVENT_TYPE_UNKNOWN = 0;
+  // 创建po成功
+  ORDER_EVENT_TYPE_PO_CREATED = 1;
+  // 商家确认接单
+  ORDER_EVENT_TYPE_ORDER_CONFIRMED = 2;
+  // 已部分发货
+  ORDER_EVENT_TYPE_ORDER_PARTIAL_SHIPPED = 3;
+  // 已全部发货
+  ORDER_EVENT_TYPE_ORDER_ALL_SHIPPED = 4;
+  // 配送完成
+  ORDER_EVENT_TYPE_ORDER_DELIVERED_COMPLETE = 5;
+  // 已取消
+  ORDER_EVENT_TYPE_ORDER_CANCELED = 6;
+  // 取消中
+  ORDER_EVENT_TYPE_ORDER_CANCELLING = 7;
+  // 已完成
+  ORDER_EVENT_TYPE_ORDER_COMPLETED = 8;
+}
+
+// 订单记录
+message OrderEvent {
+  // 订单主键
+  int64 order_id = 1;
+  // 平台订单号
+  string platform_order_id = 2;
+  // 平台类型
+  common.PlatformType platform_type = 3;
+  // 事件类型
+  OrderEventType event_type = 4;
+  // 事件描述
+  string event_desc = 5;
+  // 事件时间
+  google.protobuf.Timestamp created_at = 6;
+  // 操作人名字
+  string created_by_name = 7;
+  // 操作人 ID
+  int64 created_by = 8;
+  // 事件详情
+  string detail = 9;
+}
+
+// 订单的tag类型
+
+enum OrderTagType {
+  ORDER_TAG_UNKNOWN = 0;
+  // 用户主动修改订单收货信息，非商家;
+  ORDER_TAG_RECEIVE_INFO_MODIFIED = 1;
+  // 订单物流异常;
+  ORDER_TAG_LOGISTICS_EXCEPTION = 2;
+  // 买家发起售后申请;
+  ORDER_TAG_REFUND_APPLIED_BY_USER = 3;
+  // 商家主动修改订单收货信息;
+  ORDER_TAG_RECEIVE_INFO_MODIFIED_BY_MERCHANT = 4;
+  // 订单需要进一步解密;
+  ORDER_TAG_REQUIRE_DECRYPTION = 5;
+  // 批量呼叫配送异常;
+  ORDER_TAG_BATCH_CALLING_DELIVERY_EXCEPTION = 6;
+  // 配送平台无人接单异常;
+  ORDER_TAG_NOT_ACCEPTED_DELIVERY_EXCEPTION = 7;
+  // 骑手或平台取消订单的异常;
+  ORDER_TAG_CANCELED_EXCEPTION = 8;
+}
+
+message ListSimpleOrderRequest {
+  // 页码, 可选，默认1
+  int32 page = 1;
+  // 分页大小, 可选，默认20, 最多 1000
+  int32 page_size = 2;
+  // 平台类型列表, 可选
+  repeated common.PlatformType platform_types = 3;
+  // 商家ID列表, 可选
+  repeated int64 merchant_ids = 4;
+  // 订单创建时间开始, 可选, 传入毫秒时间戳
+  int64 create_time_start = 5;
+  // 订单创建时间结束, 可选, 传入毫秒时间戳
+  int64 create_time_end = 6;
+  // 平台订单号列表, 可选
+  repeated string platform_order_ids = 7;
+  // 平台门店名称列表, 可选
+  repeated string platform_shop_names = 8;
+  // 订单主状态列表, 可选
+  repeated OrderMainStatus main_status_list = 9;
+  // 手机号后四位，可选
+  string mobile_last_four = 10;
+  // 子单ID，可选
+  int64 sub_order_id = 11;
+  // 仅查看预约单，可选
+  bool only_pre_order = 12;
+  // 仅查看退款单，可选
+  bool only_refund_order = 13;
+  // 单个商家ID, 可选
+  int64 merchant_id = 14;
+  // 平台门店主键列表, 可选
+  repeated int64 platform_shop_pks = 15;
+  // 禁止分页
+  bool disable_pagination = 16;
+  // 是否仅查看异常单，可选 默认是 false
+  bool only_abnormal = 17;
+  // 子单关联的商家物流号
+  string merchant_logistics_serial_number = 18;
+  // 是否仅查看信天翁物流端配送单，可选 默认是 false
+  bool only_xtw_logistics = 19;
+  // 是否只查看活订单
+  bool is_alive_orders = 20;
+  // 多个子单查询
+  repeated int64 sub_order_ids = 21;
+  // 多个发货门店查询，可选
+  repeated int64 warehouse_ids = 22;
+  // 订单tag查询
+  repeated OrderTagType order_tag_types = 23;
+}
+
+message ListSimpleOrderResponse {
+  repeated SimpleOrder simple_orders = 1;
+  int32 total = 2;
+}
+
+message GetOrderDetailByIdRequest {
+  // 订单主键
+  int64 order_id = 1;
+}
+
+message GetOrderDetailByIdResponse {
+  Order order = 1;
+}
+
+
+
+service OrderService {
+  // 订单列表, 分页, 按 ID 倒排
+  rpc ListSimpleOrder(ListSimpleOrderRequest) returns (ListSimpleOrderResponse);
+  // 通过订单ID获取列表详情
+  rpc GetOrderDetailById(GetOrderDetailByIdRequest) returns (GetOrderDetailByIdResponse);
+
+}
