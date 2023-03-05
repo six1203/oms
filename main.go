@@ -26,7 +26,7 @@ func main() {
 	}
 
 	grpcServer := grpc.NewServer()
-	logger.Infof("grpc server is running on 127.0.0.1:%d ...", *port)
+	logger.Infof("grpc server is running at 127.0.0.1:%d ...", *port)
 
 	// GreeterService 是我要从service文件夹导入进来的方法
 	pb.RegisterGreeterServiceServer(grpcServer, &service.GreeterService{})
