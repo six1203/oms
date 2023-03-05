@@ -7,6 +7,7 @@ import (
 )
 
 type OrderService struct {
+	pb.UnimplementedOrderServiceServer
 }
 
 func (order *OrderService) GetOrderDetailById(ctx *context.Context, req *pb.GetOrderDetailByIdRequest) (*pb.GetOrderDetailByIdResponse, error) {
