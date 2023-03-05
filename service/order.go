@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"log"
-	pb "order/pb/github.com/six1203/order/order"
+	pb "order/pb/proto"
 )
 
 type OrderService struct {

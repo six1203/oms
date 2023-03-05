@@ -5,7 +5,7 @@ package order.platform_shop;
 import "google/protobuf/timestamp.proto";
 import "common.proto";
 
-option go_package = "github.com/six1203/order/platform_shop;platform_shop";
+option go_package = "./proto";
 
 
 

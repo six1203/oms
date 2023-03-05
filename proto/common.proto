@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package order.common;
 
-option go_package = "github.com/six1203/order/common;common";
+option go_package = "./proto";
 
 message FilterKeyword {
   string field_to_filter = 1 [json_name="fieldToFilter"];
