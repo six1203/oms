@@ -6,7 +6,7 @@ proto_dir=proto
 # --proto_path 指定protobuf的父目录
 
 pb:
-	rm -rf $(go_out)/*
+	rm -rf $(go_out)/proto/*
 
 	protoc --go_out=$(go_out) \
 		   --go-grpc_out=require_unimplemented_servers=false:$(go_out) \
