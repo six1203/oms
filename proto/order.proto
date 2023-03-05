@@ -489,12 +489,28 @@ message GetOrderDetailByIdResponse {
   Order order = 1;
 }
 
+// 输入平台门店id，是否预订单，订单总价，用户实际支付，优惠金额，平台用户id，收货人，
+// 收货人真实手机号，收货人完整地址，用户备注，即可创建一个订单出来
+message CreateOrderRequest {
+  string platform_shop_id = 1;
+  bool is_pre_order = 2;
+  int32 total = 3;
+  int32 user_paid = 4;
+  int32 discount_amount = 5;
+  string platform_user_id = 6;
+  string receiver = 7;
+  string real_mobile = 8;
+  string detail_address = 9;
+  string user_remark = 10;
+}
 
+message CreateOrderResponse {
+  Order order = 1;
+}
 
 service OrderService {
-  // 订单列表, 分页, 按 ID 倒排
-  rpc ListSimpleOrder(ListSimpleOrderRequest) returns (ListSimpleOrderResponse);
   // 通过订单ID获取列表详情
   rpc GetOrderDetailById(GetOrderDetailByIdRequest) returns (GetOrderDetailByIdResponse);
-
+  // 创建订单,先简单实现
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
 }

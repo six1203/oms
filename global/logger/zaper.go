@@ -28,11 +28,10 @@ func init() {
 
 	viper.SetConfigFile("./config.yaml")
 	err := viper.ReadInConfig()
-	zapConfig := viper.Sub("zap")
-
 	if err != nil { // 处理读取配置文件的错误
 		panic(fmt.Errorf("Fatal error config file: %s \n", err))
 	}
+	zapConfig := viper.Sub("zap")
 
 	level := getLoggerLevel(viper.GetString(zapConfig.GetString("level")))
 

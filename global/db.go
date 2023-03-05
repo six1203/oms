@@ -1,4 +1,4 @@
-package tools
+package global
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"order/tools/logger"
+	"order/global/logger"
 	"strconv"
 	"time"
 )
@@ -19,11 +19,10 @@ var db *gorm.DB
 func init() {
 	viper.SetConfigFile("./config.yaml")
 	err := viper.ReadInConfig()
-	mysqlConfig := viper.Sub("mysql")
-
 	if err != nil { // 处理读取配置文件的错误
 		panic(fmt.Errorf("Fatal error config file: %s \n", err))
 	}
+	mysqlConfig := viper.Sub("mysql")
 	host := mysqlConfig.GetString("host")
 	port := mysqlConfig.GetInt("port")
 	dbName := mysqlConfig.GetString("dbname")

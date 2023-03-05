@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"net"
+	_ "order/global"
+	"order/global/logger"
 	pb "order/pb/proto"
 	"order/service"
-	_ "order/tools"
-	"order/tools/logger"
 )
 
 var (
@@ -32,7 +32,10 @@ func main() {
 	// GreeterService 是我要从service文件夹导入进来的方法
 	pb.RegisterGreeterServiceServer(grpcServer, &service.GreeterService{})
 
+	pb.RegisterOrderServiceServer(grpcServer, &service.OrderService{})
+
 	if err := grpcServer.Serve(listener); err != nil {
 		logger.Fatalf("failed to serve:%v", err)
 	}
+
 }

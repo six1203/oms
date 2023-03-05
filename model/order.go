@@ -5,6 +5,26 @@ import (
 	"time"
 )
 
+const (
+	ORDER_MAIN_STATUS_UNKNOWN = 0
+	// 未支付
+	ORDER_MAIN_STATUS_UNPAID = 5
+	// 待接单
+	ORDER_MAIN_STATUS_WAIT_CONFIRM = 10
+	// 已接单
+	ORDER_MAIN_STATUS_CONFIRMED = 20
+	// 配送中
+	ORDER_MAIN_STATUS_DELIVERING = 30
+	// 配送完成
+	ORDER_MAIN_STATUS_DELIVERED = 40
+	// 取消中
+	ORDER_MAIN_STATUS_CANCELING = 50
+	// 已取消
+	ORDER_MAIN_STATUS_CANCELED = 60
+	// 已完成
+	ORDER_MAIN_STATUS_FINISHED = 70
+)
+
 type Order struct {
 	Common
 	PlatformOrderId             string         `gorm:"type:varchar(255);not null;default:''"`

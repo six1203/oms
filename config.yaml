@@ -33,3 +33,7 @@ zap:
   maxSize: 10240
   # 日志文件名
   path: ./logs/order.log
+
+amap:
+  # 高德地图key
+  key: a8048b58a245ca4328c9cd4c095cc660
