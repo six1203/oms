@@ -7,6 +7,7 @@ import (
 	"net"
 	pb "order/pb/proto"
 	"order/service"
+	_ "order/tools"
 	"order/tools/logger"
 )
 

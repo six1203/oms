@@ -17,7 +17,6 @@ var db *gorm.DB
 
 //包初始化函数，golang特性，每个包初始化的时候会自动执行init函数，这里用来初始化gorm。
 func init() {
-
 	viper.SetConfigFile("./config.yaml")
 	err := viper.ReadInConfig()
 	mysqlConfig := viper.Sub("mysql")
@@ -55,7 +54,7 @@ func init() {
 	mysqlConn.SetMaxOpenConns(maxOpenConns)
 	mysqlConn.SetConnMaxLifetime(connMaxLifeTime)
 	data, _ := json.Marshal(mysqlConn.Stats()) //获得当前的SQL配置情况
-	fmt.Println(string(data))
+	logger.Infof("当前的SQL配置情况：%v", string(data))
 
 }
 
