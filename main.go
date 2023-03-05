@@ -6,7 +6,7 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"net"
-	Pb "order/pb/proto"
+	pb "order/pb/proto"
 	"order/service"
 	"order/tools/logger"
 )
@@ -30,7 +30,7 @@ func main() {
 	log.Printf("grpc server is running on 127.0.0.1:%d ...", *port)
 
 	// GreeterService 是我要从service文件夹导入进来的方法
-	Pb.RegisterGreeterServiceServer(grpcServer, &service.GreeterService{})
+	pb.RegisterGreeterServiceServer(grpcServer, &service.GreeterService{})
 
 	if err := grpcServer.Serve(listener); err != nil {
 		logger.Fatalf("failed to serve:%v", err)
