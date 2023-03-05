@@ -7,7 +7,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"log"
+	"order/tools/logger"
 	"strconv"
 	"time"
 )
@@ -38,7 +38,7 @@ func init() {
 	connMaxLifeTime := time.Duration(viper.GetInt("conn-max-life-time"))
 
 	dsn := fmt.Sprintf("%s@(%s:%d)/%s?charset=%s&parseTime=%s&loc=%s&timeout=%s", username, host, port, dbName, charset, parseTime, loc, timeout)
-	log.Printf("mysql数据库的连接url==>%s", dsn)
+	logger.Infof("mysql数据库的连接url==>%v", dsn)
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{NamingStrategy: schema.NamingStrategy{
 		// 表名前缀，`Product` 的表名应该是 `t_products`， 默认不起用
 		//TablePrefix: "",
