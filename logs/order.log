@@ -1,0 +1,8 @@
+{"level":"info","ts":"2023-03-05 19:56:39.562498","caller":"global/db.go:39","msg":"mysql数据库的连接url==>root@(127.0.0.1:3306)/order?charset=utf8&parseTime=true&loc=Local&timeout=10s"}
+{"level":"info","ts":"2023-03-05 19:56:39.564542","caller":"global/db.go:56","msg":"当前的SQL配置情况：{\"MaxOpenConnections\":100,\"OpenConnections\":1,\"InUse\":0,\"Idle\":1,\"WaitCount\":0,\"WaitDuration\":0,\"MaxIdleClosed\":0,\"MaxIdleTimeClosed\":0,\"MaxLifetimeClosed\":0}"}
+{"level":"info","ts":"2023-03-05 19:56:39.564767","caller":"order/main.go:30","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-03-05 19:56:52.092330","caller":"global/db.go:39","msg":"mysql数据库的连接url==>root@(127.0.0.1:3306)/order?charset=utf8&parseTime=true&loc=Local&timeout=10s"}
+{"level":"info","ts":"2023-03-05 19:56:52.093731","caller":"global/db.go:56","msg":"当前的SQL配置情况：{\"MaxOpenConnections\":100,\"OpenConnections\":1,\"InUse\":0,\"Idle\":1,\"WaitCount\":0,\"WaitDuration\":0,\"MaxIdleClosed\":0,\"MaxIdleTimeClosed\":0,\"MaxLifetimeClosed\":0}"}
+{"level":"info","ts":"2023-03-05 19:56:52.093981","caller":"order/main.go:30","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-03-05 19:56:56.215238","caller":"service/order.go:43","msg":"收到创建订单的请求：platform_shop_id:\"d0db3c70-f94d-4d79-9b4b-d29af2d9b388\" is_pre_order:true total:10 user_paid:10 discount_amount:10 platform_user_id:\"ed86f2ba-f558-41fb-b7fe-b1e8852d5271\" receiver:\"Hello\" real_mobile:\"Hello\" detail_address:\"Hello\" user_remark:\"Hello\""}
+{"level":"info","ts":"2023-03-05 19:56:56.219830","caller":"tools/amap.go:36","msg":"https://restapi.amap.com/v3/geocode/geo?address=Hello&key=a8048b58a245ca4328c9cd4c095cc660"}

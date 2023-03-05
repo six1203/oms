@@ -20,7 +20,7 @@ zap:
   # 是否压缩文件，使用gzip
   compress: 1
   consoleStdout: 1
-  fileStdout: 0
+  fileStdout: 1
   # 日志级别
   level: debug
   # 日志时间戳
