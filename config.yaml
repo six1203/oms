@@ -15,3 +15,21 @@ mysql:
   max-open-conns: 100
   # 设置连接可重用的最大时间
   conn-max-life-time: 24*3600
+
+zap:
+  # 是否压缩文件，使用gzip
+  compress: 1
+  consoleStdout: 1
+  fileStdout: 0
+  # 日志级别
+  level: debug
+  # 日志时间戳
+  localTime: 1
+  # 最长保存天数
+  maxAge: 30
+  # 最多备份几个
+  maxBackups: 300
+  # 日志文件大小
+  maxSize: 10240
+  # 日志文件名
+  path: ./logs/order.log

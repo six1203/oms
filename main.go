@@ -8,6 +8,7 @@ import (
 	"net"
 	Pb "order/pb/proto"
 	"order/service"
+	"order/tools/logger"
 )
 
 var (
@@ -22,7 +23,7 @@ func init() {
 func main() {
 	listener, err := net.Listen("tcp", fmt.Sprintf("127.0.0.1:%d", *port))
 	if err != nil {
-		log.Fatal(err)
+		logger.Error(err)
 	}
 
 	grpcServer := grpc.NewServer()
@@ -32,6 +33,6 @@ func main() {
 	Pb.RegisterGreeterServiceServer(grpcServer, &service.GreeterService{})
 
 	if err := grpcServer.Serve(listener); err != nil {
-		log.Fatalf("failed to serve:%v", err)
+		logger.Fatalf("failed to serve:%v", err)
 	}
 }
