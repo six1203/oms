@@ -1,7 +1,6 @@
 package global
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
@@ -36,7 +35,6 @@ func init() {
 	connMaxLifeTime := time.Duration(viper.GetInt("conn-max-life-time"))
 
 	dsn := fmt.Sprintf("%s@(%s:%d)/%s?charset=%s&parseTime=%s&loc=%s&timeout=%s", username, host, port, dbName, charset, parseTime, loc, timeout)
-	logger.Infof("mysql数据库的连接url==>%v", dsn)
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{NamingStrategy: schema.NamingStrategy{
 		// 表名前缀，`Product` 的表名应该是 `t_products`， 默认不起用
 		//TablePrefix: "",
@@ -52,9 +50,7 @@ func init() {
 	mysqlConn.SetMaxIdleConns(maxIdleConns)
 	mysqlConn.SetMaxOpenConns(maxOpenConns)
 	mysqlConn.SetConnMaxLifetime(connMaxLifeTime)
-	data, _ := json.Marshal(mysqlConn.Stats()) //获得当前的SQL配置情况
-	logger.Infof("当前的SQL配置情况：%v", string(data))
-
+	logger.Info("数据库连接成功")
 }
 
 func GetDB() *gorm.DB {

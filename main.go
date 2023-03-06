@@ -37,5 +37,4 @@ func main() {
 	if err := grpcServer.Serve(listener); err != nil {
 		logger.Fatalf("failed to serve:%v", err)
 	}
-
 }

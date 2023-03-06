@@ -37,3 +37,13 @@ zap:
 amap:
   # 高德地图key
   key: a8048b58a245ca4328c9cd4c095cc660
+
+redis:
+  # redis地址
+  host: 127.0.0.1
+  # redis端口
+  port: 6379
+  # redis密码
+  password:
+  # redis数据库
+  db: 0
