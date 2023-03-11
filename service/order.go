@@ -62,14 +62,13 @@ func (o *OrderService) CreateOrder(ctx context.Context, req *pb.CreateOrderReque
 	coordinate := strings.Split(regeocode.Location, ",")
 
 	order := model.Order{
-		PlatformOrderId:  strconv.FormatInt(platformOrderId, 10),
-		PlatformShopPk:   ps.Id,
-		PlatformShopId:   ps.PlatformShopId,
-		PlatformShopName: ps.PlatformShopName,
-		PlatformType:     ps.PlatformType,
-		MainStatus:       model.ORDER_MAIN_STATUS_WAIT_CONFIRM,
-		// FIXME 通过mapping表来获取
-		MainStatusDesc:      "待接单",
+		PlatformOrderId:     strconv.FormatInt(platformOrderId, 10),
+		PlatformShopPk:      ps.Id,
+		PlatformShopId:      ps.PlatformShopId,
+		PlatformShopName:    ps.PlatformShopName,
+		PlatformType:        ps.PlatformType,
+		MainStatus:          model.ORDER_MAIN_STATUS_WAIT_CONFIRM,
+		MainStatusDesc:      model.ORDER_MAIN_STATUS_WAIT_CONFIRM.CnName(),
 		CreateTime:          tools.GetNowTime(),
 		ConfirmDeadline:     tools.GetNowTimeAddMinute(5),
 		UpdateTime:          tools.GetUnixEpoch(),
