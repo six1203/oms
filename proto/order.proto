@@ -513,4 +513,6 @@ service OrderService {
   rpc GetOrderDetailById(GetOrderDetailByIdRequest) returns (GetOrderDetailByIdResponse);
   // 创建订单,先简单实现
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+  // 订单列表, 分页, 按 ID 倒排
+  rpc ListSimpleOrder(ListSimpleOrderRequest) returns (ListSimpleOrderResponse);
 }

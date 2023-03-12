@@ -23,8 +23,7 @@ func (o *OrderService) GetOrderDetailById(ctx context.Context, req *pb.GetOrderD
 	db := global.GetDB()
 
 	var order model.Order
-	result := db.First(&order, 1)
-
+	result := db.First(&order, req.OrderId)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		return nil, fmt.Errorf("对象不存在：%d", req.OrderId)
 	}
@@ -35,6 +34,8 @@ func (o *OrderService) GetOrderDetailById(ctx context.Context, req *pb.GetOrderD
 		PlatformType:    pb.PlatformType(order.PlatformType),
 		MainStatus:      pb.OrderMainStatus(order.MainStatus),
 		MainStatusDesc:  order.MainStatusDesc,
+		OrderId:         order.Id,
+		CreateTime:      tools.TimeToTimestamp(order.CreateTime),
 	}
 	return &pb.GetOrderDetailByIdResponse{Order: &pbOrder}, nil
 }
@@ -98,6 +99,11 @@ func (o *OrderService) CreateOrder(ctx context.Context, req *pb.CreateOrderReque
 		PlatformType:    pb.PlatformType(order.PlatformType),
 		MainStatus:      pb.OrderMainStatus(order.MainStatus),
 		MainStatusDesc:  order.MainStatusDesc,
+		OrderId:         order.Id,
 	}
 	return &pb.CreateOrderResponse{Order: &pbOrder}, nil
+}
+
+func (o *OrderService) ListSimpleOrder(ctx context.Context, req *pb.ListSimpleOrderRequest) (*pb.ListSimpleOrderResponse, error) {
+	return nil, nil
 }
