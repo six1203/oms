@@ -1,10 +1,10 @@
-package model
+package base
 
 import (
 	"time"
 )
 
-type Common struct {
+type Model struct {
 	Id        int64     `gorm:"primary_key"`
 	CreatedAt time.Time `gorm:"not null;index:created_at"`
 	UpdatedAt time.Time `gorm:"not null;index:updated_at"`

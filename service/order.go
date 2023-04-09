@@ -4,10 +4,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/go-playground/validator/v10"
 	"gorm.io/gorm"
 	"order/global"
 	"order/global/logger"
-	"order/model"
+	"order/model/request"
+	"order/model/system"
 	pb "order/pb/proto"
 	"order/tools"
 	"strconv"
@@ -22,7 +24,7 @@ func (o *OrderService) GetOrderDetailById(ctx context.Context, req *pb.GetOrderD
 
 	db := global.GetDB()
 
-	var order model.Order
+	var order system.Order
 	result := db.First(&order, req.OrderId)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		return nil, fmt.Errorf("对象不存在：%d", req.OrderId)
@@ -45,7 +47,7 @@ func (o *OrderService) CreateOrder(ctx context.Context, req *pb.CreateOrderReque
 
 	db := global.GetDB()
 
-	var ps model.PlatformShop
+	var ps system.PlatformShop
 	result := db.Where("platform_shop_id = ?", req.PlatformShopId).First(&ps)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		return nil, fmt.Errorf("门店不存在：%s", req.PlatformShopId)
@@ -62,14 +64,14 @@ func (o *OrderService) CreateOrder(ctx context.Context, req *pb.CreateOrderReque
 
 	coordinate := strings.Split(regeocode.Location, ",")
 
-	order := model.Order{
+	order := system.Order{
 		PlatformOrderId:     strconv.FormatInt(platformOrderId, 10),
 		PlatformShopPk:      ps.Id,
 		PlatformShopId:      ps.PlatformShopId,
 		PlatformShopName:    ps.PlatformShopName,
 		PlatformType:        ps.PlatformType,
-		MainStatus:          model.ORDER_MAIN_STATUS_WAIT_CONFIRM,
-		MainStatusDesc:      model.ORDER_MAIN_STATUS_WAIT_CONFIRM.CnName(),
+		MainStatus:          system.ORDER_MAIN_STATUS_WAIT_CONFIRM,
+		MainStatusDesc:      system.ORDER_MAIN_STATUS_WAIT_CONFIRM.CnName(),
 		CreateTime:          tools.GetNowTime(),
 		ConfirmDeadline:     tools.GetNowTimeAddMinute(5),
 		UpdateTime:          tools.GetUnixEpoch(),
@@ -105,5 +107,42 @@ func (o *OrderService) CreateOrder(ctx context.Context, req *pb.CreateOrderReque
 }
 
 func (o *OrderService) ListSimpleOrder(ctx context.Context, req *pb.ListSimpleOrderRequest) (*pb.ListSimpleOrderResponse, error) {
-	return nil, nil
+
+	validate := validator.New()
+	err := validate.Struct(
+		request.PaginationRequest{
+			Page:     req.Page,
+			PageSize: req.PageSize,
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	db := global.GetDB()
+	var orders []system.Order
+	db.Order("create_time desc").Offset(0).Limit(100).Find(&orders)
+
+	logger.Infof("orders", orders)
+
+	var total int64
+	db.Order("create_time desc").Count(&total)
+
+	var simpleOrders []*pb.SimpleOrder
+
+	for _, order := range orders {
+
+		simpleOrder := pb.SimpleOrder{
+			OrderId:         order.Id,
+			PlatformOrderId: order.PlatformOrderId,
+		}
+
+		simpleOrders = append(simpleOrders, &simpleOrder)
+	}
+
+	return &pb.ListSimpleOrderResponse{
+		SimpleOrders: simpleOrders,
+		Total:        int32(total),
+	}, nil
+
 }

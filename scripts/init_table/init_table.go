@@ -2,9 +2,9 @@ package main
 
 import (
 	"order/global"
-	"order/model"
+	"order/model/system"
 )
 
 func main() {
-	global.GetDB().AutoMigrate(&model.Order{})
+	global.GetDB().AutoMigrate(&system.Order{})
 }

@@ -1,8 +1,9 @@
-package model
+package system
 
 import (
 	"fmt"
 	"gorm.io/datatypes"
+	"order/model/base"
 	"time"
 )
 
@@ -54,7 +55,7 @@ func (orderStatus OrderMainStatus) CnName() string {
 }
 
 type Order struct {
-	Common
+	base.Model
 	PlatformOrderId             string          `gorm:"type:varchar(255);not null;default:''"`
 	PlatformShopPk              int64           `gorm:"not null;default:0"`
 	PlatformShopId              string          `gorm:"type:varchar(255);not null;default:''"`

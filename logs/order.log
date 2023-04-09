@@ -67,3 +67,44 @@
 {"level":"info","ts":"2023-03-12 18:27:50.236052","caller":"global/db.go:53","msg":"数据库连接成功"}
 {"level":"info","ts":"2023-03-12 18:27:50.236673","caller":"global/redis.go:40","msg":"redis连接成功"}
 {"level":"info","ts":"2023-03-12 18:27:50.237116","caller":"order/main.go:52","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-03-26 23:38:24.817484","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-03-26 23:38:24.821354","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-03-26 23:38:24.823287","caller":"order/main.go:52","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-03-26 23:50:01.388155","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-03-26 23:50:01.393800","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-03-27 00:00:09.612279","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-03-27 00:00:09.618436","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-03-27 00:00:39.721852","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-03-27 00:00:39.725562","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-03-27 00:01:16.451264","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-03-27 00:01:16.460827","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 21:24:14.723841","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 21:24:14.730960","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 21:24:14.746773","caller":"order/main.go:52","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-04-09 21:25:20.583483","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 21:25:20.586175","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 21:25:20.602981","caller":"order/main.go:52","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-04-09 21:38:57.156786","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 21:38:57.160802","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 21:38:57.181135","caller":"order/main.go:52","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-04-09 21:40:55.557831","caller":"service/order.go:126","msg":"orders%!(EXTRA []system.Order=[])"}
+{"level":"info","ts":"2023-04-09 21:44:04.322319","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 21:44:04.327087","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 21:46:16.102075","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 21:46:16.107299","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 21:48:03.720173","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 21:48:03.724744","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 21:48:55.797193","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 21:48:55.802632","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 21:49:33.398708","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 21:49:33.402438","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 21:59:53.518393","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 21:59:53.527161","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 22:01:59.032689","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 22:01:59.041536","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 22:02:07.992184","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 22:02:08.004014","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 22:02:37.647060","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 22:02:37.673717","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 22:21:16.655015","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 22:21:16.660430","caller":"global/redis.go:40","msg":"redis连接成功"}
