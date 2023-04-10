@@ -26,6 +26,7 @@ func init() {
 	port := mysqlConfig.GetInt("port")
 	dbName := mysqlConfig.GetString("dbname")
 	username := mysqlConfig.GetString("username")
+	password := mysqlConfig.GetString("password")
 	charset := mysqlConfig.GetString("charset")
 	parseTime := mysqlConfig.GetString("parseTime")
 	loc := mysqlConfig.GetString("loc")
@@ -34,7 +35,7 @@ func init() {
 	maxOpenConns := mysqlConfig.GetInt("max-open-conns")
 	connMaxLifeTime := time.Duration(viper.GetInt("conn-max-life-time"))
 
-	dsn := fmt.Sprintf("%s@(%s:%d)/%s?charset=%s&parseTime=%s&loc=%s&timeout=%s", username, host, port, dbName, charset, parseTime, loc, timeout)
+	dsn := fmt.Sprintf("%s:%s@(%s:%d)/%s?charset=%s&parseTime=%s&loc=%s&timeout=%s", username, password, host, port, dbName, charset, parseTime, loc, timeout)
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{NamingStrategy: schema.NamingStrategy{
 		// 表名前缀，`Product` 的表名应该是 `t_products`， 默认不起用
 		//TablePrefix: "",

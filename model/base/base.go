@@ -6,8 +6,8 @@ import (
 
 type Model struct {
 	Id        int64     `gorm:"primary_key"`
-	CreatedAt time.Time `gorm:"not null;index:created_at"`
-	UpdatedAt time.Time `gorm:"not null;index:updated_at"`
+	CreatedAt time.Time `gorm:"type:datetime;not null;index:created_at;default:current_timestamp"`
+	UpdatedAt time.Time `gorm:"type:datetime;not null;index:updated_at;default:current_timestamp ON UPDATE CURRENT_TIMESTAMP"`
 	IsDeleted bool      `gorm:"not null;default:false"`
 }
 

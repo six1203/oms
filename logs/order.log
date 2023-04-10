@@ -108,3 +108,69 @@
 {"level":"info","ts":"2023-04-09 22:02:37.673717","caller":"global/redis.go:40","msg":"redis连接成功"}
 {"level":"info","ts":"2023-04-09 22:21:16.655015","caller":"global/db.go:53","msg":"数据库连接成功"}
 {"level":"info","ts":"2023-04-09 22:21:16.660430","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 22:39:34.937373","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 22:39:34.944632","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 22:40:21.184292","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 22:40:21.184708","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 22:40:38.842452","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 22:40:38.847762","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-09 22:40:47.115295","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-09 22:40:47.121737","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 00:41:41.451142","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 00:41:41.458163","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 00:42:23.593752","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 00:42:23.597188","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 00:42:37.442442","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 00:42:37.445835","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 00:45:53.621311","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 00:45:53.626674","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 00:46:55.376143","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 00:46:55.382887","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 21:09:46.797686","caller":"global/db.go:53","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 21:09:46.803036","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 21:14:27.788940","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 21:14:27.792010","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 21:14:58.513532","caller":"global/db.go:39","msg":"url%!(EXTRA string=(root:root)@(172.29.32.1:3306)/order?charset=utf8&parseTime=true&loc=Local&timeout=10s)"}
+{"level":"info","ts":"2023-04-10 21:14:58.528343","caller":"global/db.go:55","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 21:14:58.528566","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 21:15:51.840383","caller":"global/db.go:39","msg":"url(root:root)@(172.29.32.1:3306)/order?charset=utf8&parseTime=true&loc=Local&timeout=10s"}
+{"level":"info","ts":"2023-04-10 21:15:51.848571","caller":"global/db.go:55","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 21:15:51.848842","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 21:16:35.758110","caller":"global/db.go:39","msg":"urlroot:root@(172.29.32.1:3306)/order?charset=utf8&parseTime=true&loc=Local&timeout=10s"}
+{"level":"info","ts":"2023-04-10 21:16:35.773834","caller":"global/db.go:55","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 21:16:35.774092","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 21:37:03.552181","caller":"global/db.go:39","msg":"urlroot:root@(172.29.32.1:3306)/order?charset=utf8&parseTime=true&loc=Local&timeout=10s"}
+{"level":"info","ts":"2023-04-10 21:37:03.562943","caller":"global/db.go:55","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 21:37:03.563174","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 21:37:03.574279","caller":"order/main.go:52","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-04-10 21:37:04.800545","caller":"service/order.go:46","msg":"收到创建订单的请求：platform_shop_id:\"7e033bd0-1989-4cc5-870f-f2f21b581136\"  is_pre_order:true  total:10  user_paid:10  discount_amount:10  platform_user_id:\"5e9c5d30-5746-495c-bc5d-aa840905b562\"  receiver:\"Hello\"  real_mobile:\"Hello\"  detail_address:\"Hello\"  user_remark:\"Hello\""}
+{"level":"info","ts":"2023-04-10 21:37:04.806765","caller":"tools/amap.go:36","msg":"https://restapi.amap.com/v3/geocode/geo?address=Hello&key=a8048b58a245ca4328c9cd4c095cc660"}
+{"level":"info","ts":"2023-04-10 21:37:51.925054","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 21:37:51.933244","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 21:40:54.374601","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 21:40:54.382499","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 21:40:54.395187","caller":"order/main.go:52","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-04-10 21:41:01.137866","caller":"service/order.go:46","msg":"收到创建订单的请求：platform_shop_id:\"7e033bd0-1989-4cc5-870f-f2f21b581136\"  is_pre_order:true  total:10  user_paid:10  discount_amount:10  platform_user_id:\"5e9c5d30-5746-495c-bc5d-aa840905b562\"  receiver:\"Hello\"  real_mobile:\"Hello\"  detail_address:\"Hello\"  user_remark:\"Hello\""}
+{"level":"info","ts":"2023-04-10 21:41:16.765174","caller":"service/order.go:126","msg":"orders%!(EXTRA []system.Order=[{{1 2023-04-10 21:37:04.977 +0800 CST 2023-04-10 21:37:04.977 +0800 CST false} 13079883764731904 0   0 0 10 待确认 2023-04-10 21:37:04.976 +0800 CST 2023-04-10 21:42:04.976 +0800 CST 1970-01-01 08:00:00 +0800 CST 1970-01-01 08:00:00 +0800 CST  1970-01-01 08:00:00 +0800 CST 2023-04-10 22:37:04.976 +0800 CST false 10 10 10 0 0 0 0 0 0 0 0 0 13079883764740096 Hello Hello   湖南省 衡阳市 石鼓区 Hello Hello 112.608424 26.899013 Hello  false  0 0 0  false  0 }])"}
+{"level":"info","ts":"2023-04-10 21:51:48.218860","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 21:51:48.227298","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 21:51:48.244123","caller":"order/main.go:52","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-04-10 21:51:53.002669","caller":"service/order.go:129","msg":"errunsupported data type: 0xc000396478: Table not set, please set it like: db.Model(&user) or db.Table(\"users\")"}
+{"level":"info","ts":"2023-04-10 22:09:06.524015","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 22:09:06.530741","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 22:09:06.544827","caller":"order/main.go:52","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-04-10 22:09:15.763002","caller":"service/order.go:135","msg":"err<nil>"}
+{"level":"info","ts":"2023-04-10 22:09:18.565070","caller":"service/order.go:135","msg":"err<nil>"}
+{"level":"info","ts":"2023-04-10 22:10:16.761471","caller":"service/order.go:135","msg":"err<nil>"}
+{"level":"info","ts":"2023-04-10 22:10:24.040629","caller":"service/order.go:48","msg":"收到创建订单的请求：platform_shop_id:\"bb973b0c-77e4-44cb-b91e-46cfd7a25081\" is_pre_order:true total:10 user_paid:10 discount_amount:10 platform_user_id:\"53441710-3e9d-4393-8e20-20457dc7f495\" receiver:\"Hello\" real_mobile:\"Hello\" detail_address:\"Hello\" user_remark:\"Hello\""}
+{"level":"info","ts":"2023-04-10 22:17:59.155461","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 22:17:59.160452","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 22:20:39.286066","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 22:20:39.292282","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 22:22:28.243824","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 22:22:28.253902","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 22:27:49.826109","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 22:27:49.831851","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 22:28:10.220309","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-10 22:28:10.223104","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-10 22:28:10.236412","caller":"order/main.go:52","msg":"grpc server is running at 127.0.0.1:8080 ..."}

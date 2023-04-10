@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/go-playground/validator/v10"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"gorm.io/gorm"
 	"order/global"
 	"order/global/logger"
@@ -121,13 +123,15 @@ func (o *OrderService) ListSimpleOrder(ctx context.Context, req *pb.ListSimpleOr
 
 	db := global.GetDB()
 	var orders []system.Order
-	db.Order("create_time desc").Offset(0).Limit(100).Find(&orders)
-
-	logger.Infof("orders", orders)
+	if err := db.Order("create_time desc").Offset(0).Limit(100).Find(&orders).Error; err != nil {
+		return nil, status.Errorf(codes.Internal, "查询订单信息失败：%v", err)
+	}
 
 	var total int64
-	db.Order("create_time desc").Count(&total)
-
+	if err := db.Model(&system.Order{}).Order("create_time desc").Count(&total).Error; err != nil {
+		return nil, status.Errorf(codes.Internal, "查询订单信息失败：%v", err)
+	}
+	
 	var simpleOrders []*pb.SimpleOrder
 
 	for _, order := range orders {

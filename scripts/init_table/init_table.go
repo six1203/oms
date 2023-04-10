@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	global.GetDB().AutoMigrate(&system.Order{})
+	global.GetDB().AutoMigrate(&system.Order{}, &system.PlatformShop{})
 }

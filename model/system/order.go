@@ -64,13 +64,13 @@ type Order struct {
 	CredentialType              int8            `gorm:"not null;default:0"`
 	MainStatus                  OrderMainStatus `gorm:"not null;default:0"`
 	MainStatusDesc              string          `gorm:"type:varchar(255);not null;default:''"`
-	CreateTime                  time.Time       `gorm:"not null;index:create_time"`
-	ConfirmDeadline             time.Time       `gorm:"not null;index:confirm_deadline"`
-	FinishTime                  time.Time       `gorm:"not null;index:finish_time"`
-	CancelTime                  time.Time       `gorm:"not null;index:cancel_time"`
-	CancelReason                string          `gorm:"type:text;not null"`
-	UpdateTime                  time.Time       `gorm:"not null;index:update_time"`
-	ExpectedArrivalTime         time.Time       `gorm:"not null;index:expected_arrival_time"`
+	CreateTime                  time.Time       `gorm:"type:datetime;not null;index:create_time;default:current_timestamp"`
+	ConfirmDeadline             time.Time       `gorm:"type:datetime;not null;index:confirm_deadline;default:1970-01-01 00:00:00"`
+	FinishTime                  time.Time       `gorm:"type:datetime;not null;index:finish_time;default:1970-01-01 00:00:00"`
+	CancelTime                  time.Time       `gorm:"type:datetime;not null;index:cancel_time;default:1970-01-01 00:00:00"`
+	CancelReason                string          `gorm:"type:varchar(1024);not null;default:''"`
+	UpdateTime                  time.Time       `gorm:"type:datetime;not null;index:update_time;default:1970-01-01 00:00:00"`
+	ExpectedArrivalTime         time.Time       `gorm:"type:datetime;not null;index:expected_arrival_time;default:1970-01-01 00:00:00"`
 	IsPreOrder                  bool            `gorm:"not null;default:false"`
 	Total                       int32           `gorm:"not null;default:0"`
 	UserPaid                    int32           `gorm:"not null;default:0"`
@@ -92,12 +92,12 @@ type Order struct {
 	Province                    string          `gorm:"type:varchar(255);not null;default:''"`
 	City                        string          `gorm:"type:varchar(255);not null;default:''"`
 	Town                        string          `gorm:"type:varchar(255);not null;default:''"`
-	DetailAddress               string          `gorm:"type:text;not null"`
-	FullAddress                 string          `gorm:"type:text;not null"`
+	DetailAddress               string          `gorm:"type:varchar(1024);not null;default:''"`
+	FullAddress                 string          `gorm:"type:varchar(1024);not null;default:''"`
 	Longitude                   string          `gorm:"type:varchar(255);not null;default:''"`
 	Latitude                    string          `gorm:"type:varchar(255);not null;default:''"`
-	UserRemark                  string          `gorm:"type:text;not null"`
-	MerchantRemark              string          `gorm:"type:text;not null"`
+	UserRemark                  string          `gorm:"type:varchar(1024);not null;default:''"`
+	MerchantRemark              string          `gorm:"type:varchar(1024);not null;default:''"`
 	IsAbnormal                  bool            `gorm:"not null;default:false"`
 	AbnormalReason              datatypes.JSON  `gorm:"json"`
 	PlatformShopDeliveryType    int8            `gorm:"not null;default:0"`
