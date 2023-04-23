@@ -123,7 +123,12 @@ func (o *OrderService) ListSimpleOrder(ctx context.Context, req *pb.ListSimpleOr
 
 	db := global.GetDB()
 	var orders []system.Order
-	if err := db.Order("create_time desc").Offset(0).Limit(100).Find(&orders).Error; err != nil {
+
+	limit := int(req.PageSize)
+
+	offset := int((req.Page - 1) * req.PageSize)
+
+	if err := db.Order("create_time desc").Offset(offset).Limit(limit).Find(&orders).Error; err != nil {
 		return nil, status.Errorf(codes.Internal, "查询订单信息失败：%v", err)
 	}
 
@@ -131,7 +136,7 @@ func (o *OrderService) ListSimpleOrder(ctx context.Context, req *pb.ListSimpleOr
 	if err := db.Model(&system.Order{}).Order("create_time desc").Count(&total).Error; err != nil {
 		return nil, status.Errorf(codes.Internal, "查询订单信息失败：%v", err)
 	}
-	
+
 	var simpleOrders []*pb.SimpleOrder
 
 	for _, order := range orders {
@@ -146,7 +151,7 @@ func (o *OrderService) ListSimpleOrder(ctx context.Context, req *pb.ListSimpleOr
 
 	return &pb.ListSimpleOrderResponse{
 		SimpleOrders: simpleOrders,
-		Total:        int32(total),
+		Total:        total,
 	}, nil
 
 }

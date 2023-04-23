@@ -477,7 +477,7 @@ message ListSimpleOrderRequest {
 
 message ListSimpleOrderResponse {
   repeated SimpleOrder simple_orders = 1;
-  int32 total = 2;
+  int64 total = 2;
 }
 
 message GetOrderDetailByIdRequest {
