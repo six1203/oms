@@ -10,44 +10,44 @@ import (
 type OrderMainStatus int
 
 const (
-	ORDER_MAIN_STATUS_UNKNOWN OrderMainStatus = 0
-	// 未支付
-	ORDER_MAIN_STATUS_UNPAID OrderMainStatus = 5
-	// 待接单
-	ORDER_MAIN_STATUS_WAIT_CONFIRM OrderMainStatus = 10
-	// 已接单
-	ORDER_MAIN_STATUS_CONFIRMED OrderMainStatus = 20
-	// 配送中
-	ORDER_MAIN_STATUS_DELIVERING OrderMainStatus = 30
-	// 配送完成
-	ORDER_MAIN_STATUS_DELIVERED OrderMainStatus = 40
-	// 取消中
-	ORDER_MAIN_STATUS_CANCELING OrderMainStatus = 50
-	// 已取消
-	ORDER_MAIN_STATUS_CANCELED OrderMainStatus = 60
-	// 已完成
-	ORDER_MAIN_STATUS_FINISHED OrderMainStatus = 70
+	OrderMainStatusUnknown OrderMainStatus = 0
+	// OrderMainStatusUnpaid 未支付
+	OrderMainStatusUnpaid OrderMainStatus = 5
+	// OrderMainStatusWaitConfirm 待接单
+	OrderMainStatusWaitConfirm OrderMainStatus = 10
+	// OrderMainStatusConfirmed 已接单
+	OrderMainStatusConfirmed OrderMainStatus = 20
+	// OrderMainStatusDelivering 配送中
+	OrderMainStatusDelivering OrderMainStatus = 30
+	// OrderMainStatusDelivered 配送完成
+	OrderMainStatusDelivered OrderMainStatus = 40
+	// OrderMainStatusCanceling 取消中
+	OrderMainStatusCanceling OrderMainStatus = 50
+	// OrderMainStatusCanceled 已取消
+	OrderMainStatusCanceled OrderMainStatus = 60
+	// OrderMainStatusFinished 已完成
+	OrderMainStatusFinished OrderMainStatus = 70
 )
 
 func (orderStatus OrderMainStatus) CnName() string {
 	switch orderStatus {
-	case ORDER_MAIN_STATUS_UNKNOWN:
+	case OrderMainStatusUnknown:
 		return "未知"
-	case ORDER_MAIN_STATUS_UNPAID:
+	case OrderMainStatusUnpaid:
 		return "等待支付"
-	case ORDER_MAIN_STATUS_WAIT_CONFIRM:
+	case OrderMainStatusWaitConfirm:
 		return "待确认"
-	case ORDER_MAIN_STATUS_CONFIRMED:
+	case OrderMainStatusConfirmed:
 		return "已确认"
-	case ORDER_MAIN_STATUS_DELIVERING:
+	case OrderMainStatusDelivering:
 		return "配送中"
-	case ORDER_MAIN_STATUS_DELIVERED:
+	case OrderMainStatusDelivered:
 		return "已送达"
-	case ORDER_MAIN_STATUS_CANCELING:
+	case OrderMainStatusCanceling:
 		return "取消中"
-	case ORDER_MAIN_STATUS_CANCELED:
+	case OrderMainStatusCanceled:
 		return "已取消"
-	case ORDER_MAIN_STATUS_FINISHED:
+	case OrderMainStatusFinished:
 		return "已完成"
 	default:
 		return fmt.Sprintf("未知状态 %d", orderStatus)

@@ -1,9 +1,9 @@
 mysql:
-  host: 172.29.32.1
+  host: 127.0.0.1
   port: 3306
   dbname: order
   username: root
-  password: root
+  password:
   charset: utf8
   parseTime: True
   loc: Local

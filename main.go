@@ -27,6 +27,7 @@ func registerServices(server *grpc.Server) {
 	pb.RegisterGreeterServiceServer(server, &service.GreeterService{})
 
 	pb.RegisterOrderServiceServer(server, &service.OrderService{})
+	pb.RegisterPlatformShopServiceServer(server, &service.PlatformShopService{})
 }
 
 // FIXME 日志拦截器, 可以考虑直接使用第三方的日志拦截器

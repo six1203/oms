@@ -212,3 +212,9 @@
 {"level":"info","ts":"2023-04-09 23:32:46.154327","caller":"service/order.go:141","msg":"test0"}
 {"level":"info","ts":"2023-04-09 23:32:48.576615","caller":"service/order.go:141","msg":"test0"}
 >>>>>>> a714c2d (fix)
+{"level":"info","ts":"2023-04-23 15:59:17.969814","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-23 15:59:17.971809","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-23 15:59:17.977669","caller":"oms/main.go:53","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-04-23 16:00:10.287907","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-23 16:00:10.288191","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-23 16:00:10.291203","caller":"oms/main.go:53","msg":"grpc server is running at 127.0.0.1:8080 ..."}
