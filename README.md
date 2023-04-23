@@ -8,10 +8,11 @@
 ### 数据库：mysql
 ### 日志：zap
 ### 字段校验：validator
+### 消息队列：kafka
 
 
 ## 待实现
 ### 搜索：elasticsearch
-### 消息队列：kafka
 ### 服务发现：kitex
 ### 分库分表
+### mysql替换为tidb
