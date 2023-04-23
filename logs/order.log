@@ -218,3 +218,11 @@
 {"level":"info","ts":"2023-04-23 16:00:10.287907","caller":"global/db.go:54","msg":"数据库连接成功"}
 {"level":"info","ts":"2023-04-23 16:00:10.288191","caller":"global/redis.go:40","msg":"redis连接成功"}
 {"level":"info","ts":"2023-04-23 16:00:10.291203","caller":"oms/main.go:53","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-04-23 16:30:08.636799","caller":"global/db.go:54","msg":"数据库连接成功"}
+{"level":"info","ts":"2023-04-23 16:30:08.637771","caller":"global/redis.go:40","msg":"redis连接成功"}
+{"level":"info","ts":"2023-04-23 16:30:08.643246","caller":"oms/main.go:53","msg":"grpc server is running at 127.0.0.1:8080 ..."}
+{"level":"info","ts":"2023-04-23 16:30:20.930266","caller":"service/order.go:50","msg":"收到创建订单的请求：platform_shop_id:\"fb89dfc4-364f-4598-a72f-c4f5763e9010\" is_pre_order:true total:10 user_paid:10 discount_amount:10 platform_user_id:\"1d2b1e82-5dbb-4dec-99ee-775d185daab0\" receiver:\"Hello\" real_mobile:\"Hello\" detail_address:\"Hello\" user_remark:\"Hello\""}
+{"level":"info","ts":"2023-04-23 16:30:49.829587","caller":"service/order.go:50","msg":"收到创建订单的请求：platform_shop_id:\"d0db3c70-f94d-4d79-9b4b-d29af2d9b388\" is_pre_order:true total:10 user_paid:10 discount_amount:10 platform_user_id:\"1d2b1e82-5dbb-4dec-99ee-775d185daab0\" receiver:\"Hello\" real_mobile:\"Hello\" detail_address:\"Hello\" user_remark:\"Hello\""}
+{"level":"info","ts":"2023-04-23 16:30:49.836511","caller":"tools/amap.go:36","msg":"https://restapi.amap.com/v3/geocode/geo?address=Hello&key=a8048b58a245ca4328c9cd4c095cc660"}
+{"level":"info","ts":"2023-04-23 16:39:36.792952","caller":"service/order.go:50","msg":"收到创建订单的请求：platform_shop_id:\"d0db3c70-f94d-4d79-9b4b-d29af2d9b388\" is_pre_order:true total:10 user_paid:10 discount_amount:10 platform_user_id:\"1d2b1e82-5dbb-4dec-99ee-775d185daab0\" receiver:\"Hello\" real_mobile:\"Hello\" detail_address:\"Hello\" user_remark:\"Hello\""}
+{"level":"info","ts":"2023-04-23 16:39:36.796645","caller":"tools/amap.go:36","msg":"https://restapi.amap.com/v3/geocode/geo?address=Hello&key=a8048b58a245ca4328c9cd4c095cc660"}

@@ -2,8 +2,10 @@ package service
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/Shopify/sarama"
 	"github.com/go-playground/validator/v10"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -97,6 +99,26 @@ func (o *OrderService) CreateOrder(ctx context.Context, req *pb.CreateOrderReque
 	}
 
 	db.Create(&order)
+
+	producer, err := sarama.NewSyncProducer([]string{"localhost:9092"}, global.NewKafkaProducerConfig())
+	if err != nil {
+		panic(err)
+	}
+	defer producer.Close()
+
+	orderJson, err := json.Marshal(order)
+	if err != nil {
+		panic(err)
+	}
+	// 创建消息
+	message := &sarama.ProducerMessage{
+		Topic: "test",
+		Value: sarama.StringEncoder(orderJson),
+	}
+	_, _, err = producer.SendMessage(message)
+	if err != nil {
+		panic(err)
+	}
 
 	pbOrder := pb.Order{
 		PlatformOrderId: order.PlatformOrderId,
